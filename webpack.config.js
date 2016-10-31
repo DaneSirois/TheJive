@@ -5,7 +5,7 @@ module.exports = {
   devtool: 'eval',
   entry: [
     'webpack-dev-server/client?http://localhost:3000',
-    './src/index.jsx'
+    './app/index.jsx'
   ],
   output: {
     path: path.join(__dirname, 'dist'),
@@ -17,7 +17,12 @@ module.exports = {
       {
         test: /\.jsx?$/,
         loaders: ['babel'],
-        include: path.join(__dirname, 'src')
+        include: path.join(__dirname, 'app')
+      },
+      {
+        test: /\.js?$/,
+        loaders: ['babel'],
+        include: path.join(__dirname, 'app')
       },
       {
         test: /\.scss$/,

@@ -1,7 +1,7 @@
 {
-  "name": "react-simple-boilerplate",
+  "name": "TheJive",
   "version": "1.0.0",
-  "description": "Simple and lightweight Boilerplate for ReactJS projects",
+  "description": "Jive with friends",
   "scripts": {
     "lint": "eslint src",
     "start": "node server.js"
@@ -19,12 +19,8 @@
     "edit",
     "webpack"
   ],
-  "author": "Noah-Jerome Lotzer <n.lotzer@neusta.de>",
+  "author": "Dane Sirois",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/noahlotzer/react-simple-boilerplate/issues"
-  },
-  "homepage": "https://github.com/noahlotzer/react-simple-boilerplate",
   "engines": {
     "node": ">=6.0.0"
   },
@@ -46,6 +42,8 @@
   },
   "dependencies": {
     "react": "15.2.1",
-    "react-dom": "15.2.1"
+    "react-dom": "15.2.1",
+    "react-redux": "^4.4.5",
+    "redux": "^3.6.0"
   }
 }
