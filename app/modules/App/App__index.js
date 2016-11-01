@@ -1,10 +1,15 @@
 import React, {Component} from 'react';
 
-class App extends Component {
+import Chatroom__index from '../Chatroom/Chatroom__index.js';
+
+class App__index extends Component {
   render() {
     return (
-      <h1>Hello React :)</h1>
+      <div class="App__module">
+        <Chatroom__index />
+      </div>
     );
-  }
-}
-export default App;
+  };
+};
+
+export default App__index;

@@ -17,16 +17,19 @@ module.exports = {
       {
         test: /\.jsx?$/,
         loaders: ['babel'],
-        include: path.join(__dirname, 'app')
+        include: path.join(__dirname, 'app'),
+        exclude: /node_modules/
       },
       {
-        test: /\.js?$/,
+        test: /\.js$/,
         loaders: ['babel'],
-        include: path.join(__dirname, 'app')
+        include: path.join(__dirname, 'app'),
+        exclude: /node_modules/
       },
       {
         test: /\.scss$/,
-        loaders: ["style", "css", "sass"]
+        loaders: ["style", "css", "sass"],
+        exclude: /node_modules/
       }
     ]
   }

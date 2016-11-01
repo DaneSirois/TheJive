@@ -1,22 +1,23 @@
 import React, {Component} from 'react';
 
-require("./styles/application.scss");
+require("./styles/index.scss");
 
 // Dependencies:
-  import React from 'react';
   import ReactDOM from 'react-dom';
-  import { Provider } from 'react-redux';
-  import { createStore, applyMiddleware } from 'redux';
+  // import {Provider} from 'react-redux';
+  // import {createStore, applyMiddleware} from 'redux';
 
 // Imports:
   import App__index from './modules/App/App__index.js';
-  import root_reducer from './root_reducer.js';
+  // import root_reducer from './root_reducer.js';
 
-const createStoreWithMiddleware = applyMiddleware()(createStore);
+// const createStoreWithMiddleware = applyMiddleware()(createStore);
 
-ReactDOM.render(
-  <Provider store={createStoreWithMiddleware(root_reducer)}>
-    <App__index />
-  </Provider>,
-  document.getElementById('root')
-);
+ReactDOM.render(<App__index />, document.getElementById('root'));
+
+// ReactDOM.render(
+//   <Provider store={createStoreWithMiddleware(root_reducer)}>
+//     <App__index />
+//   </Provider>,
+//   document.getElementById('root')
+// );

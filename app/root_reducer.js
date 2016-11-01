@@ -4,7 +4,7 @@ import { combineReducers } from 'redux';
 import Chatroom__reducer from './modules/Chatroom/reducers/index.js';
 
 const root_reducer = combineReducers({
-  Chatroom: Chatroom__reducer,
+  // Chatroom: Chatroom__reducer,
 });
 
 export default root_reducer;
