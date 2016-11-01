@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
 // Actions:
-import Chatroom__action__setUsername from './actions/Chatroom__action__setUsername.js';
+import User__action__setUsername from '../../User/actions/User__action__setUsername.js';
 import Chatroom__action__sendMessage from './actions/Chatroom__action__sendMessage.js';
 
 
@@ -29,7 +29,7 @@ class Chatroom__container__chatbar extends Component {
       <footer>
         <span> Your username is: {this.props.username} </span>
         <form onSubmit={this.sendMessageFunc}>
-          <input id="username" type="text" onChange={this.setUsernameFunc} placeholder="enter your username:" />
+          <input id="username" type="text" onChange={this.setUsernameFunc} placeholder="enter your username:" value={this.props.username} />
           <input id="new-message" type="text" placeholder="Type a message and hit ENTER" />
         </form>
       </footer>
@@ -39,13 +39,13 @@ class Chatroom__container__chatbar extends Component {
 
 function mapStateToProps (state) {
   return ({
-    username: state.Chatroom.username
+    username: state.User.username
   });
 };
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({ 
-    action__setUsername: Chatroom__action__setUsername,
+    action__setUsername: User__action__setUsername,
     action__sendMessage: Chatroom__action__sendMessage
   }, dispatch);
 };
