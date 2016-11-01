@@ -1,31 +1,37 @@
 import React, {Component} from 'react';
-// import {connect} from 'react-redux';
-// import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 
 // Actions:
-// import Chatroom__action__submitMessage from './actions/Chatroom__action__submitMessage.js'
+import Chatroom__action__setUsername from './actions/Chatroom__action__setUsername.js'
 
 class Chatroom__container__chatbar extends Component {
+  constructor (props) {
+    super(props);
+    this.setUsernameFunc = this.setUsernameFunc.bind(this);
+  }
+  setUsernameFunc(input) {
+    this.props.setUsername(input.target.value);
+  }
   render() {
     return (
       <footer>
-        <input id="username" type="text" placeholder="Your Name (Optional)" />
+        <span> Your username is: {this.props.username} </span>
+        <input id="username" type="text" onChange={this.setUsernameFunc} placeholder="enter your username:" />
         <input id="new-message" type="text" placeholder="Type a message and hit ENTER" />
       </footer>
     );
   };
 };
 
-export default Chatroom__container__chatbar;
+function mapStateToProps (state) {
+  return ({
+    username: state.Chatroom.username
+  });
+};
 
-// function mapStateToProps (state) {
-//   return ({
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ setUsername: Chatroom__action__setUsername }, dispatch);
+};
 
-//   });
-// };
-
-// function mapDispatchToProps(dispatch) {
-//   return bindActionCreators({ submitMessage: Chatroom__action__submitMessage }, dispatch);
-// };
-
-// export default connect(mapStateToProps, mapDispatchToProps)(Chatroom__container__chatbar);
+export default connect(mapStateToProps, mapDispatchToProps)(Chatroom__container__chatbar);
