@@ -3,34 +3,21 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
 // Actions:
-import User__action__setUsername from '../../User/actions/User__action__setUsername.js';
-import Chatroom__action__sendMessage from './actions/Chatroom__action__sendMessage.js';
+import {setUsername__action} from '../User/actions/index.js';
+// import sendMessage from './actions/Chatroom__action__sendMessage.js';
+
+import {submitMessage__action, buildMessage__action} from './actions/index.js';
 
 
 class Chatroom__container__chatbar extends Component {
-  constructor (props) {
-    super(props);
-    this.setUsernameFunc = this.setUsernameFunc.bind(this);
-    this.sendMessageFunc = this.sendMessageFunc.bind(this);
-  }
-  setUsernameFunc(input) {
-    this.props.action__setUsername(input.target.value);
-  }
-  sendMessageFunc(input) {
-    const messageObj = {
-      username: this.props.username,
-      content: input.target.value
-    };
-    console.log(messageObj);
-    this.props.action__sendMessage(messageObj);
-  }
   render() {
     return (
       <footer>
         <span> Your username is: {this.props.username} </span>
-        <form onSubmit={this.sendMessageFunc}>
-          <input id="username" type="text" onChange={this.setUsernameFunc} placeholder="enter your username:" value={this.props.username} />
-          <input id="new-message" type="text" placeholder="Type a message and hit ENTER" />
+        <form onSubmit={this.props.submitMessage(this.props.username, this.props.message)}>
+          <input id="username" type="text" onChange={this.props.setUsername} placeholder="Enter a username:" value={this.props.username} />
+          <input id="new-message" type="text" onChange={this.props.buildMessage} placeholder="Type a message.." value={this.props.message} />
+          <button type="submit">Send</button>
         </form>
       </footer>
     );
@@ -39,15 +26,25 @@ class Chatroom__container__chatbar extends Component {
 
 function mapStateToProps (state) {
   return ({
-    username: state.User.username
+    username: state.User.username,
+    message: state.Chatroom.builtMessage
   });
 };
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ 
-    action__setUsername: User__action__setUsername,
-    action__sendMessage: Chatroom__action__sendMessage
-  }, dispatch);
-};
+const mapDispatchToProps = dispatch => ({
+  setUsername: (e) => dispatch(setUsername__action(e.target.value)),
+  buildMessage:  (e) => dispatch(buildMessage__action(e.target.value)),
+  submitMessage: (username, message) => (e) => {
+    e.preventDefault();
+    dispatch(submitMessage__action(username, message));
+  }
+});
+
+// function mapDispatchToProps(dispatch) {
+//   return bindActionCreators({ 
+//     setUsername__action: User__action__setUsername,
+//     sendMessage__action: Chatroom__action__sendMessage
+//   }, dispatch);
+// };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Chatroom__container__chatbar);

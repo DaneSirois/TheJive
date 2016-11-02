@@ -1,2 +1,2 @@
-export const SET_USERNAME = 'SET_USERNAME';
-export const SEND_MESSAGE = 'SEND_MESSAGE';
+export const SUBMIT_MESSAGE = 'SUBMIT_MESSAGE';
+export const BUILD_MESSAGE = 'BUILD_MESSAGE';

@@ -5,7 +5,7 @@ class Chatroom__component__message extends Component {
     return (
       <div className="message">
         <span className="username">{this.props.messageData.username}</span>
-        <span className="content">{this.props.messageData.content}</span>
+        <span className="content">{this.props.messageData.message}</span>
       </div>
     );
   };
