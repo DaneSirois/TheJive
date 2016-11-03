@@ -1,4 +1,4 @@
-import {SUBMIT_MESSAGE} from '../Chatroom__types.js';
+import {NEW_MESSAGE} from '../Chatroom__types.js';
 
 const initialState = [
   {
@@ -11,13 +11,13 @@ const initialState = [
   }
 ];
 
-const Chatroom__reducer__submitMessage = (state = initialState, action) => {
+const Chatroom__reducer__newMessage = (state = initialState, action) => {
   switch(action.type) {
-    case SUBMIT_MESSAGE:
+    case NEW_MESSAGE:
       return state.concat([action.payload]);
     default:
       return state;
   };
 };
 
-export default Chatroom__reducer__submitMessage;
+export default Chatroom__reducer__newMessage;

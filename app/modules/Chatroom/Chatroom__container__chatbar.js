@@ -3,10 +3,8 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
 // Actions:
-import {setUsername__action} from '../User/actions/index.js';
-// import sendMessage from './actions/Chatroom__action__sendMessage.js';
-
-import {submitMessage__action, buildMessage__action} from './actions/index.js';
+import {addUser__action, setUsername__action} from '../User/actions/index.js';
+import {newMessage__action, buildMessage__action} from './actions/index.js';
 
 
 class Chatroom__container__chatbar extends Component {
@@ -14,7 +12,7 @@ class Chatroom__container__chatbar extends Component {
     return (
       <footer>
         <span> Your username is: {this.props.username} </span>
-        <form onSubmit={this.props.submitMessage(this.props.username, this.props.message)}>
+        <form onSubmit={this.props.newMessage(this.props.username, this.props.message)}>
           <input id="username" type="text" onChange={this.props.setUsername} placeholder="Enter a username:" value={this.props.username} />
           <input id="new-message" type="text" onChange={this.props.buildMessage} placeholder="Type a message.." value={this.props.message} />
           <button type="submit">Send</button>
@@ -34,9 +32,10 @@ function mapStateToProps (state) {
 const mapDispatchToProps = dispatch => ({
   setUsername: (e) => dispatch(setUsername__action(e.target.value)),
   buildMessage:  (e) => dispatch(buildMessage__action(e.target.value)),
-  submitMessage: (username, message) => (e) => {
+  newMessage: (username, message) => (e) => {
     e.preventDefault();
-    dispatch(submitMessage__action(username, message));
+    dispatch(addUser__action(username));
+    dispatch(newMessage__action(username, message));
   }
 });
 

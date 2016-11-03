@@ -1,6 +1,34 @@
-var webpack = require('webpack');
-var WebpackDevServer = require('webpack-dev-server');
-var config = require('./webpack.config');
+const webpack = require('webpack');
+const WebpackDevServer = require('webpack-dev-server');
+const config = require('./webpack.config');
+
+const http = require('http');
+const server = http.createServer();
+const socket_io = require('socket.io');
+server.listen(3001);
+const io = socket_io();
+
+// Sockets:
+
+io.attach(server);
+
+io.on('connection', (socket) => {
+  console.log(`Socket connected: ${socket.id}`);
+  socket.on('action', (action) => {
+    if(action.type === 'server/NEW_MESSAGE'){
+      console.log('new message received!', action.payload);
+      io.emit('action', {
+        type: "NEW_MESSAGE", 
+        payload: {
+          username: action.payload.username,
+          message: action.payload.message
+        }
+      });
+    }
+  });
+});
+
+// Dev server:
 
 new WebpackDevServer(webpack(config), {
   publicPath: config.output.publicPath,
