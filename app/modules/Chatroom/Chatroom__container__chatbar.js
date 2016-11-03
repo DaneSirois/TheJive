@@ -3,11 +3,12 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
 // Actions:
-import {addUser__action, getUserId__action, setUsername__action} from '../User/actions/index.js';
+import {addUser__action, setUsername__action} from '../User/actions/index.js';
 import {newMessage__action, buildMessage__action} from './actions/index.js';
 
 class Chatroom__container__chatbar extends Component {
   render() {
+    console.log('rendering chatbar', this.props);
     return (
       <footer>
         <span> Your username is: {this.props.username} </span>
@@ -36,18 +37,8 @@ const mapDispatchToProps = dispatch => ({
   handleSubmit: (connectedUsers, userId, username, message) => (e) => {
     e.preventDefault();
 
-    dispatch(getUserId__action());
-    console.log("HEREEE IS USER ID");
-    console.log(userId);
-
-    if (connectedUsers.find((user) => user.userId === userId)) {
-      console.log(user);
-    } else {
-      dispatch(addUser__action(username));
-    }
-
     dispatch(newMessage__action(username, message));
-    console.log(connectedUsers);
+    // console.log(connectedUsers);
   }
 });
 
