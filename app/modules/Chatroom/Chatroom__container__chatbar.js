@@ -55,7 +55,7 @@ const mapDispatchToProps = dispatch => ({
 //   return bindActionCreators({ 
 //     setUsername__action: User__action__setUsername,
 //     sendMessage__action: Chatroom__action__sendMessage
-//   }, dispatch);
+//   }, dispatch); 
 // };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Chatroom__container__chatbar);
