@@ -1,7 +1,6 @@
 import {BUILD_MESSAGE} from '../Chatroom__types.js';
 
 const Chatroom__reducer__messages = (state = "", action) => {
-  console.log('Chatroom Messages Reducer', state, action)
   switch(action.type) {
     case BUILD_MESSAGE:
       return action.payload;

@@ -1,3 +1,4 @@
+const utilities_module = require('./utilities_module.js');
 const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
 const config = require('./webpack.config');
@@ -14,6 +15,7 @@ io.attach(server);
 
 io.on('connection', (socket) => {
   console.log(`Socket connected: ${socket.id}`);
+
   socket.on('action', (action) => {
     if(action.type === 'server/NEW_MESSAGE'){
       console.log('new message received!', action.payload);
@@ -26,6 +28,32 @@ io.on('connection', (socket) => {
       });
     }
   });
+
+  socket.on('action', (action) => {
+    if(action.type === 'server/ADD_USER'){
+      console.log('Adding the user to the list', action.payload);
+      io.emit('action', {
+        type: "ADD_USER", 
+        payload: {
+          id: socket.id,
+          username: action.payload.username,
+          color: utilities_module.generateRandomColor()
+        }
+      });
+    }
+  });
+
+  socket.on('action', (action) => {
+    if(action.type === 'server/GET_USERID'){
+      io.emit('action', {
+        type: "GET_USERID", 
+        payload: {
+          id: socket.id
+        }
+      });
+    }
+  });
+
 });
 
 // Dev server:
