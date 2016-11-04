@@ -1,2 +1,3 @@
 export const NEW_MESSAGE = 'NEW_MESSAGE';
 export const BUILD_MESSAGE = 'BUILD_MESSAGE';
+export const RESET_MESSAGE_STATE = 'RESET_MESSAGE_STATE';

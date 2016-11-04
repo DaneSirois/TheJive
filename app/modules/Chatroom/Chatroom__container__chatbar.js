@@ -4,7 +4,7 @@ import {bindActionCreators} from 'redux';
 
 // Actions:
 import {addUser__action, updateUsername__action} from '../User/actions/index.js';
-import {newMessage__action, buildMessage__action} from './actions/index.js';
+import {newMessage__action, resetMessageState__action, buildMessage__action} from './actions/index.js';
 
 class Chatroom__container__chatbar extends Component {
   render() {
@@ -38,7 +38,7 @@ const mapDispatchToProps = (dispatch) => ({
     const currentUser = connectedUsers.find((user) => {
       return user.ourself === true;
     });
-    console.log("USER IS:", currentUser);
+    dispatch(resetMessageState__action(""));
     dispatch(newMessage__action(currentUser.username, message));
   }
 });
