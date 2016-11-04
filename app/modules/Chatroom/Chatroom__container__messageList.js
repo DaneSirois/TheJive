@@ -13,7 +13,7 @@ class Chatroom__container__messageList extends Component {
     const messagesList = this.props.messages;
     return messagesList.map((message, index) => {
       return (
-        <Chatroom__component__message key={index} messageData={message} />
+        <Chatroom__component__message key={index} messageData={message} color={message.color} />
       ); 
     });
   }

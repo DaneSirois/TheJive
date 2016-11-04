@@ -1,3 +1,3 @@
-export const SET_USERNAME = 'SET_USERNAME';
 export const ADD_USER = 'ADD_USER';
-export const GET_USERID = 'GET_USERID';
+export const UPDATE_USERNAME = 'UPDATE_USERNAME';
+export const GET_USER = 'GET_USER';

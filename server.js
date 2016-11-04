@@ -35,7 +35,7 @@ io.on('connection', (socket) => {
 
   Object.keys(io.sockets.sockets)
     .map((id) => io.sockets.sockets[id]._user) //Get all connected user's info
-    .filter((user) => user.id !== socket.id) //Exclude yourself, since line 37...
+    .filter((user) => user.id !== socket.id) //Exclude yourself
     .forEach((user) => emit__action('ADD_USER', user));
 
   socket.on('action', (action) => {
@@ -43,13 +43,15 @@ io.on('connection', (socket) => {
       case 'server/NEW_MESSAGE':
         socket._user.username = action.payload.username;
         broadcast__action('NEW_MESSAGE', {
+          color: socket._user.color,
           username: action.payload.username,
           message: action.payload.message
         });
         break;
       case 'server/UPDATE_USERNAME':
-        socket._user.username = action.payload.username;
+        socket._user.username = action.payload;
         broadcast__action('UPDATE_USERNAME', socket._user);
+        emit__action('GET_USER', socket._user);
         break;
       case 'server/UPDATE_NAME_COLOR':
         socket._user.color = action.payload.color;
