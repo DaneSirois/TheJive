@@ -1,4 +1,4 @@
-import {ADD_USER, UPDATE_USERNAME} from '../User__types.js';
+import {ADD_USER, REMOVE_USER, UPDATE_USERNAME} from '../User__types.js';
 
 const User__reducer__user = (state = [], action) => {
   switch(action.type) {
@@ -10,6 +10,12 @@ const User__reducer__user = (state = [], action) => {
           return Object.assign({}, user, { username: action.payload.username });
         }
         return user;
+      });
+    case REMOVE_USER:
+      console.log("PAYLOAD OBJ: ", action.payload);
+      return state.filter((user) => {
+        console.log('USER OBJ: ', user);
+        return user.id !== action.payload.id;
       });
     default:
       return state;

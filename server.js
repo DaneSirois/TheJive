@@ -59,6 +59,10 @@ io.on('connection', (socket) => {
         break;
     }
   });
+
+  socket.on('disconnect', function(){
+    broadcast__action('REMOVE_USER', socket._user);
+  });
 });
 
 // Dev server:

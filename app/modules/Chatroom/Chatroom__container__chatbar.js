@@ -11,7 +11,7 @@ class Chatroom__container__chatbar extends Component {
     console.log(this.props.userObj);
     return (
       <footer>
-        <span> Your username is: {this.props.userObj.username} </span>
+        <span>Your username is:</span>
         <form onSubmit={this.props.handleSubmit(this.props.connectedUsers, this.props.message)}>
           <input id="username" type="text" onChange={this.props.updateUsername} placeholder="Anonymous" />
           <input id="new-message" type="text" onChange={this.props.buildMessage} placeholder="Type a message.." value={this.props.message} />
