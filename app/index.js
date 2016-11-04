@@ -9,6 +9,7 @@ import io from 'socket.io-client';
 require("./styles/index.scss");
 
 const socket = io('http://localhost:3001');
+
 const socketIoMiddleware = createSocketIoMiddleware(socket, "server/");
 
 // Imports:

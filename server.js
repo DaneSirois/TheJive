@@ -3,61 +3,65 @@ const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
 const config = require('./webpack.config');
 
+const util = require('util');
+
+const inspect = (o, d = 1) => {
+  console.log(util.inspect(o, { colors: true, depth: d }));
+  return o;
+};
+
+// Socket IO:
 const http = require('http');
 const server = http.createServer();
 const socket_io = require('socket.io');
 server.listen(3001);
 const io = socket_io();
 
-// Sockets:
-
 io.attach(server);
 
 io.on('connection', (socket) => {
   console.log(`Socket connected: ${socket.id}`);
 
+  const emit__action = (type, payload) => socket.emit('action', { type, payload });
+  const broadcast__action = (type, payload) => io.emit('action', { type, payload });
+
+  socket._user = {
+    id: socket.id,
+    username: "Anonymous",
+    color: utilities_module.generateRandomColor()
+  };
+
+  broadcast__action('ADD_USER', Object.assign({}, socket._user, { ourself: true }));
+
+  Object.keys(io.sockets.sockets)
+    .map((id) => io.sockets.sockets[id]._user) //Get all connected user's info
+    .filter((user) => user.id !== socket.id) //Exclude yourself
+    .forEach((user) => emit__action('ADD_USER', user));
+
   socket.on('action', (action) => {
-    if(action.type === 'server/NEW_MESSAGE'){
-      console.log('new message received!', action.payload);
-      io.emit('action', {
-        type: "NEW_MESSAGE", 
-        payload: {
+    switch (action.type) {
+      case 'server/NEW_MESSAGE':
+        socket._user.username = action.payload.username;
+        broadcast__action('NEW_MESSAGE', {
+          color: socket._user.color,
           username: action.payload.username,
           message: action.payload.message
-        }
-      });
+        });
+        break;
+      case 'server/UPDATE_USERNAME':
+        socket._user.username = action.payload;
+        broadcast__action('UPDATE_USERNAME', socket._user);
+        emit__action('GET_USER', socket._user);
+        break;
+      case 'server/UPDATE_NAME_COLOR':
+        socket._user.color = action.payload.color;
+        broadcast__action('UPDATE_NAME_COLOR', socket._user);
+        break;
     }
   });
-
-  socket.on('action', (action) => {
-    if(action.type === 'server/ADD_USER'){
-      console.log('Adding the user to the list', action.payload);
-      io.emit('action', {
-        type: "ADD_USER", 
-        payload: {
-          id: socket.id,
-          username: action.payload.username,
-          color: utilities_module.generateRandomColor()
-        }
-      });
-    }
-  });
-
-  socket.on('action', (action) => {
-    if(action.type === 'server/GET_USERID'){
-      io.emit('action', {
-        type: "GET_USERID", 
-        payload: {
-          id: socket.id
-        }
-      });
-    }
-  });
-
 });
 
 // Dev server:
-
 new WebpackDevServer(webpack(config), {
   publicPath: config.output.publicPath,
   watchOptions: {
