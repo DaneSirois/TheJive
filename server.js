@@ -41,7 +41,7 @@ io.on('connection', (socket) => {
   socket.on('action', (action) => {
     switch (action.type) {
       case 'server/NEW_MESSAGE':
-        socket._user.username = action.payload.username;
+        socket._user.username = action.payload.username || "Anonymous";
         broadcast__action('NEW_MESSAGE', {
           color: socket._user.color,
           username: action.payload.username,
@@ -49,7 +49,7 @@ io.on('connection', (socket) => {
         });
         break;
       case 'server/UPDATE_USERNAME':
-        socket._user.username = action.payload;
+        socket._user.username = action.payload || "Anonymous";
         broadcast__action('UPDATE_USERNAME', socket._user);
         emit__action('GET_USER', socket._user);
         break;
