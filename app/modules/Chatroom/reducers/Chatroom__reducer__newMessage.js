@@ -1,19 +1,6 @@
 import {NEW_MESSAGE} from '../Chatroom__types.js';
 
-const initialState = [
-  {
-    color: "#000",
-    username: "Bob",
-    message: "Has anyone seen my marbles?",
-  },
-  {
-    color: "#000",
-    username: "Anonymous",
-    message: "No, I think you lost them. You lost your marbles Bob. You lost them for good."
-  }
-];
-
-const Chatroom__reducer__newMessage = (state = initialState, action) => {
+const Chatroom__reducer__newMessage = (state = [], action) => {
   switch(action.type) {
     case NEW_MESSAGE:
       return state.concat([action.payload]);

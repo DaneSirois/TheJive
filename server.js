@@ -28,6 +28,7 @@ io.on('connection', (socket) => {
   socket._user = {
     id: socket.id,
     username: "Anonymous",
+    avatar: "http://lorempixel.com/60/60/",
     color: utilities_module.generateRandomColor()
   };
 
@@ -43,12 +44,18 @@ io.on('connection', (socket) => {
       case 'server/NEW_MESSAGE':
         socket._user.username = action.payload.username || "Anonymous";
         broadcast__action('NEW_MESSAGE', {
+          avatar: socket._user.avatar,
           color: socket._user.color,
           username: action.payload.username,
           message: action.payload.message
         });
         break;
       case 'server/UPDATE_USERNAME':
+        broadcast__action('NEW_MESSAGE', {
+          color: "#000", 
+          message: `${socket._user.username} Updated their username to: ${action.payload || "anonymous"}`,
+          username: "SYSTEM"
+        });
         socket._user.username = action.payload || "Anonymous";
         broadcast__action('UPDATE_USERNAME', socket._user);
         emit__action('GET_USER', socket._user);

@@ -11,11 +11,11 @@ class Chatroom__container__chatbar extends Component {
     console.log(this.props.userObj);
     return (
       <footer>
-        <span>Your username is:</span>
         <form onSubmit={this.props.handleSubmit(this.props.connectedUsers, this.props.message)}>
-          <input id="username" type="text" onChange={this.props.updateUsername} placeholder="Anonymous" />
+          <label className="username--label">UserName:</label>
+          <input id="username" type="text" onBlur={this.props.updateUsername} placeholder={this.props.userObj.username || "Anonymous"} />
           <input id="new-message" type="text" onChange={this.props.buildMessage} placeholder="Type a message.." value={this.props.message} />
-          <button type="submit">Send</button>
+          <button id="message-submit__button" type="submit">Send</button>
         </form>
       </footer>
     );
@@ -42,12 +42,5 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(newMessage__action(currentUser.username, message));
   }
 });
-
-// function mapDispatchToProps(dispatch) {
-//   return bindActionCreators({ 
-//     setUsername__action: User__action__setUsername,
-//     sendMessage__action: Chatroom__action__sendMessage
-//   }, dispatch); 
-// };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Chatroom__container__chatbar);

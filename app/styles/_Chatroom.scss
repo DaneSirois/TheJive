@@ -1,27 +1,178 @@
+// mirror directions //
+@function mirror ($direction) {
+ @each $d in $direction {
+   @if($direction == 'top') { @return 'bottom'; }
+   @if($direction == 'bottom') { @return 'top'; }
+   @if($direction == 'left') { @return 'right'; }
+   @if($direction == 'right') { @return 'left'; }
+   @else { @return $direction; }
+ }
+}
 
-html, body { max-height: 100vh; max-width: 100vw; font-family: 'Open Sans', sans-serif;}
-.wrapper { font-size: 14px; }
-nav { height: 40px; padding: 8px; border-bottom: 1px solid black; background-color: tomato; }
-nav h1 { margin: 0; }
-#message-list { height: calc(100vh - 131px); padding: 16px 8px;}
-#message-list .message { padding: 4px 0;  display: flex;}
-#message-list .message .username,#message-list .message .content {
-  display: inline-block; padding: 4px 0;
+
+// linear gradient //
+@mixin linear-gradient ($direction, $stops...) {
+ $mirrored-direction: mirror($direction);
+ background-image: -webkit-linear-gradient($direction, $stops);
+ background-image: -moz-linear-gradient($direction, $stops);
+ background-image: -ms-linear-gradient($direction, $stops);
+ background-image: -o-linear-gradient($direction, $stops);
+ background-image: linear-gradient('to' + $mirrored-direction, $stops);
 }
-#message-list .message .username { flex: 15; margin-right: 16px; overflow: hidden; font-weight: 700;}
-#message-list .message .content { flex: 85; }
-#message-list .message.system { font-weight: 400; font-style: italic; }
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+html, body { 
+  max-height: 100vh; 
+  max-width: 100vw; 
+  font-family: 'Open Sans', sans-serif;
+  box-sizing: border-box;
+}
+
+.wrapper { 
+  font-size: 14px; 
+}
+
+.Chatroom {
+  position: absolute;
+    top: 60px;
+    right: 60px;
+    bottom: 42px;
+    left: 0px;
+  background-color: #01213a;
+  background: url('/app/images/galaxy-bg.jpg') no-repeat center center fixed;
+  background-size: 100%;
+}
+
+nav { 
+  height: 60px; 
+  padding: 12px;
+  border-bottom: 1px solid black;
+  background: url("/app/images/header-60.png") repeat-x scroll 0px 0px transparent;
+  background-color: #2a2a2a; 
+}
+
+nav h1 { 
+  margin: 0;
+  float: left;
+  color: #39e013;
+}
+
+.connectedUsers--text {
+  float: right;
+  font-size: 1.2em;
+  margin-top: 6px;
+  color: #dadada;
+}
+    .connectedUsers--text:after {
+      clear: both;
+    }
+
+#Chatroom__sidebar {
+  position: fixed;
+    top: 60px;
+    right: 0px;
+    bottom: 42px;
+  width: 60px;
+  background-color: #2a2a2a;
+
+  border-left: 1px solid black;
+}
+
+
+#message-list { 
+  display: block;
+  height: 100%; 
+  @include linear-gradient(top, rgba(17,66,177, 0.3), rgba(48,43,82, 0.6), black)
+}
+
+#message-list .message { 
+  padding: 4px 0;  
+  display: flex;
+  background-color: transparent; 
+  padding: 10px 10px;
+  transition: all 0.3s ease-in-out;
+}
+
+.message__avatar__container {
+  position: relative;
+  height: 40px;
+  width: 40px;
+  margin-right: 10px;
+}
+
+.message__avatar {
+  height: 100%;
+  width: 100%;
+  border: 1px solid black;
+  border-radius: 3px;  
+}
+
+#message-list .message .username, #message-list .message .content {
+  display: inline-block; 
+  padding: 4px 0;
+}
+
+#message-list .message .username { 
+  flex: 10; 
+  margin-right: 16px; 
+  overflow: hidden; 
+  font-weight: 700;
+  text-shadow: 2px 2px 2px black;
+}
+
+#message-list .message .content { 
+  flex: 90; 
+  text-shadow: 2px 2px 2px black;
+}
+
+#message-list .message.system { 
+  font-weight: 400; 
+  font-style: italic;
+  text-shadow: 2px 2px 2px black;
+}
+
 footer { 
-  height: 41px;
+  position: fixed;
+    bottom: 0px;
+  width: 100%;
+  height: 42px;
   border-top: 1px solid black;
-  background-color: tomato; 
-  display: flex; align-items: center;
+  background-color: #2a2a2a; 
 }
+
 footer input {
   border: 1px solid black;
   margin: 4px;
   height: 20px;
-  padding: 4px 8px;
+  padding: 12px 8px;
+
+  border-radius: 4px;
 }
-footer #username { flex: 3; }
-footer #new-message { flex: 7; }
+
+
+footer form {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.username--label {
+  color: #7aacd1;
+  line-height: 42px;
+  margin: 0px 10px 0px 20px;
+}
+
+footer #username { 
+  flex: 1; 
+}
+
+footer #new-message { 
+  flex: 9; 
+}
+
+#message-submit__button {
+  margin: 0px 10px;
+}

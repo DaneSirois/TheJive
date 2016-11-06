@@ -12,18 +12,24 @@ class Chatroom__container__messageList extends Component {
   renderMessages() {
     const messagesList = this.props.messages;
     return messagesList.map((message, index) => {
-      return (
-        <Chatroom__component__message key={index} messageData={message} color={message.color} />
-      ); 
+      if (message.username === "SYSTEM") {
+        message.avatar = "/app/images/mod_avatar.png";
+        console.log(message);
+        return (
+          <Chatroom__component__message key={index} messageData={message} color={"#efefef"} />
+        )
+      } else {
+        return (
+          <Chatroom__component__message key={index} messageData={message} color={message.color} />
+        );
+      } 
     });
   }
   render() {
+    console.log(this.props.messages);
     return (
       <div id="message-list">
         {this.renderMessages()}
-        <div className="message system">
-          Anonymous1 changed their name to nomnom.
-        </div>
       </div>
     );
   };

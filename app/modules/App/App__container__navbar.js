@@ -17,8 +17,8 @@ class Chatroom__container__navbar extends Component {
   render() {
     return (
       <nav>
-        <h1>TheJive</h1>
-        <span>Connected Users: {this.props.connectedUsers.length}</span>
+        <img src="/app/images/logo.png"></img>
+        <span className="connectedUsers--text">Connected Users: {this.props.connectedUsers.length}</span>
       </nav>
     );
   };
