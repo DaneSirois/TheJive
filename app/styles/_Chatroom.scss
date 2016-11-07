@@ -48,22 +48,38 @@ html, body {
 
 nav { 
   height: 60px; 
-  padding: 12px;
   border-bottom: 1px solid black;
-  background: url("/app/images/header-60.png") repeat-x scroll 0px 0px transparent;
-  background-color: #2a2a2a; 
+  @include linear-gradient(top, #000, #000, rgba(32,23,255, 0.2))
+  background-color: #2a2a2a;
 }
 
-nav h1 { 
-  margin: 0;
+.back-button__container {
   float: left;
-  color: #39e013;
+  height: 100%;
+  width: 60px;
+  padding: 20px;
+  background-color: #1d1535;
+  border-right: 1px solid black;
+}
+
+    .back-button__container i { /* <i> - Font Awesome */
+      font-size: 1.3em;
+      color: white;
+    }
+
+#logo { 
+  position: absolute;
+    top: 0px;
+    right: 0px;
+    left: 0px;
+
+  margin: 11px auto;
 }
 
 .connectedUsers--text {
   float: right;
-  font-size: 1.2em;
-  margin-top: 6px;
+  font-size: 1.1em;
+  margin: 20px 16px;
   color: #dadada;
 }
     .connectedUsers--text:after {
@@ -145,7 +161,7 @@ footer {
 
 footer input {
   border: 1px solid black;
-  margin: 4px;
+  margin: 8px 4px;
   height: 20px;
   padding: 12px 8px;
 

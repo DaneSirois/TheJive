@@ -12,7 +12,6 @@ class Chatroom__container__chatbar extends Component {
     return (
       <footer>
         <form onSubmit={this.props.handleSubmit(this.props.connectedUsers, this.props.message)}>
-          <label className="username--label">UserName:</label>
           <input id="username" type="text" onBlur={this.props.updateUsername} placeholder={this.props.userObj.username || "Anonymous"} />
           <input id="new-message" type="text" onChange={this.props.buildMessage} placeholder="Type a message.." value={this.props.message} />
           <button id="message-submit__button" type="submit">Send</button>

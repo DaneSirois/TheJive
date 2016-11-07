@@ -17,7 +17,10 @@ class Chatroom__container__navbar extends Component {
   render() {
     return (
       <nav>
-        <img src="/app/images/logo.png"></img>
+        <div className="back-button__container">
+          <i className="fa fa-arrow-left" aria-hidden="true"></i>
+        </div>
+        <img id="logo" src="/app/images/logo.png"></img>
         <span className="connectedUsers--text">Connected Users: {this.props.connectedUsers.length}</span>
       </nav>
     );
