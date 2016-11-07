@@ -21,7 +21,7 @@ class Chatroom__container__navbar extends Component {
           <i className="fa fa-arrow-left" aria-hidden="true"></i>
         </div>
         <img id="logo" src="/app/images/logo.png"></img>
-        <span className="connectedUsers--text">Connected Users: {this.props.connectedUsers.length}</span>
+        <span className="connectedUsers--text">Online: {this.props.connectedUsers.length}</span>
       </nav>
     );
   };
