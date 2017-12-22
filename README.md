@@ -1,10 +1,11 @@
 # TheJive:
 React-Redux Chat Application.
 
-Our week 5 project at Lighthouse Labs. This project's requirements did not include CSS, but I felt like it needed some. Redux was also not a requirement but I wanted to practice it. Also, Socket.io.
+Explored a naming convention that I came up with (MTN - Module/Type/Name)
 
+- [x] React
 - [x] Redux
-- [x] Custom styling / Photoshopped logo
+- [x] Custom styling / Photoshop
 - [x] Socket.io
 
 ![Alt text](/website-screenshot.png?raw=true)
